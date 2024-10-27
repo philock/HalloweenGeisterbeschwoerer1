@@ -54,25 +54,32 @@ void setup() {
   move_up();
 }
 
-void loop() {
+void rumbleMotor(){
+  digitalWrite(PIN_RELAIS, HIGH);
+  delay(1000);
+  digitalWrite(PIN_RELAIS, LOW);
+}
 
+void loop() {
 
   delay(50);
 
   if(!digitalRead(PIN_TRIGGER)){
     digitalWrite(LED_BUILTIN, HIGH);
-
-    //digitalWrite(PIN_RELAIS, HIGH);
     
     // Start video
     Serial.print(6);
-
     release();
 
-    //wait for second flicker sound, turn lights back on and move shutter up
-    delay(15000);
+    rumbleMotor();
+    delay(3000);
+    rumbleMotor();
+    delay(3000);
+    rumbleMotor();
+
+    delay(10000);
+    
     move_up();
-    //digitalWrite(PIN_RELAIS, LOW);
      
     digitalWrite(LED_BUILTIN, LOW);
   }
