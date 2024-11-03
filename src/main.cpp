@@ -6,7 +6,7 @@
 #define PIN_RELAIS 5
 
 Servo myservo;  // create servo object to control a servo
-const int up_pos = 80;
+const int up_pos = 100;
 const int rel_pos = 70;
 const int catch_pos = 155;
 const int slow = 10;
@@ -50,14 +50,37 @@ void setup() {
   pinMode(PIN_RELAIS, OUTPUT);
   pinMode(PIN_TRIGGER, INPUT_PULLUP);
 
-  digitalWrite(PIN_RELAIS, LOW);
+  digitalWrite(PIN_RELAIS, HIGH);
   move_up();
 }
 
-void rumbleMotor(){
-  digitalWrite(PIN_RELAIS, HIGH);
-  delay(1000);
+void rumbleMotor(int duration){
   digitalWrite(PIN_RELAIS, LOW);
+  delay(duration);
+  digitalWrite(PIN_RELAIS, HIGH);
+}
+
+void videoDemons(){ 
+  Serial.print(6);
+  release();
+
+  rumbleMotor(1000);
+  delay(3000);
+  rumbleMotor(1500);
+  delay(3000);
+  rumbleMotor(1000);
+  delay(4000);
+  rumbleMotor(1000);
+  delay(2000);
+  
+  move_up();
+}
+
+void videoFire(){
+  Serial.print(7);
+  release();
+  delay(36000);
+  move_up();
 }
 
 void loop() {
@@ -65,22 +88,10 @@ void loop() {
   delay(50);
 
   if(!digitalRead(PIN_TRIGGER)){
-    digitalWrite(LED_BUILTIN, HIGH);
-    
-    // Start video
-    Serial.print(6);
-    release();
 
-    rumbleMotor();
-    delay(3000);
-    rumbleMotor();
-    delay(3000);
-    rumbleMotor();
-
-    delay(10000);
+    if(random(2))videoDemons();
+    else videoFire();
     
-    move_up();
-     
-    digitalWrite(LED_BUILTIN, LOW);
   }
+  //delay(10000);
 }
