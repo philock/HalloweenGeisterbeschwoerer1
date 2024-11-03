@@ -1,0 +1,8 @@
+1. Open video in vlc, and press red sqaure to abort playback
+2. go to Medien -> convertieren
+3. select video
+4. choose profile: video-h.264 + mp3 (mp4)
+5. go to settings of profile and select Verkapselung: AVI
+6. select audiocodec and choose MP3 at 48000 Hz
+7. convert
+8. when vlc asks to override file, close vlc by killing it in the task manager.
